@@ -1,13 +1,12 @@
 package daos
 
 import (
-	"Air_Way_Cargo/dtos"
-	"Air_Way_Cargo/internal/daos/models"
+	"AIRWAYCARGO/dtos"
+	"AIRWAYCARGO/internal/daos/models"
 	"context"
 	"errors"
 
 	"github.com/google/uuid"
-	"github.com/wiz-freight-org/adapters/utils/db"
 )
 
 type DB struct {

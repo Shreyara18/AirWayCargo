@@ -61,6 +61,7 @@ Drivers:
     redshift
     tidb
     clickhouse
+    vertica
 
 Examples:
     goose sqlite3 ./foo.db status
@@ -74,13 +75,15 @@ Examples:
     goose redshift "postgres://user:password@qwerty.us-east-1.redshift.amazonaws.com:5439/db" status
     goose tidb "user:password@/dbname?parseTime=true" status
     goose mssql "sqlserver://user:password@dbname:1433?database=master" status
+    goose clickhouse "tcp://127.0.0.1:9000" status
+    goose vertica "vertica://user:password@localhost:5433/dbname?connection_load_balance=1" status
 
 Options:
 
   -allow-missing
     	applies missing (out-of-order) migrations
   -certfile string
-    	file path to root CA's certificates in pem format (only support on mysql)
+    	file path to root CA's certificates in pem format (only supported on mysql)
   -dir string
     	directory with migration files (default ".")
   -h	print help
@@ -88,9 +91,9 @@ Options:
     	apply migration commands with no versioning, in file order, from directory pointed to
   -s	use sequential numbering for new migrations
   -ssl-cert string
-    	file path to SSL certificates in pem format (only support on mysql)
+    	file path to SSL certificates in pem format (only supported on mysql)
   -ssl-key string
-    	file path to SSL key in pem format (only support on mysql)
+    	file path to SSL key in pem format (only supported on mysql)
   -table string
     	migrations table name (default "goose_db_version")
   -v	enable verbose mode
@@ -213,6 +216,9 @@ CREATE TABLE post (
 DROP TABLE post;
 ```
 
+Each migration file must have exactly one `-- +goose Up` annotation. The `-- +goose Down` annotation
+is optional. If the file has both annotations, then the `-- +goose Up` annotation **must** come first.
+
 Notice the annotations in the comments. Any statements following `-- +goose Up` will be executed as part of a forward migration, and any statements following `-- +goose Down` will be executed as part of a rollback.
 
 By default, all migrations are run within a transaction. Some statements like `CREATE DATABASE`, however, cannot be run within a transaction. You may optionally add `-- +goose NO TRANSACTION` to the top of your migration
@@ -331,6 +337,9 @@ func Down(tx *sql.Tx) error {
 	return nil
 }
 ```
+
+Note that Go migration files must begin with a numeric value, followed by an
+underscore, and must not end with `*_test.go`.
 
 # Development
 

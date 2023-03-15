@@ -3,8 +3,6 @@ package config
 import (
 	"os"
 	"strconv"
-	//"Air_Way_Cargo/internal/config"
-	"github.com/wiz-freight-org/adapters/utils"
 )
 
 var (

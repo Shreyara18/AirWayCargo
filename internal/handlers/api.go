@@ -1,15 +1,12 @@
 package handlers
 
 import (
-	"Air_Way_Cargo/internal/daos"
-	"Air_Way_Cargo/internal/daos/models"
+	"AIRWAYCARGO/internal/daos"
+	"AIRWAYCARGO/internal/daos/models"
 	"encoding/json"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"github.com/wiz-freight-org/adapters/utils"
-
-	"github.com/wiz-freight-org/adapters/utils/db"
 )
 
 func SetApiRoutes(v1 *gin.RouterGroup) {

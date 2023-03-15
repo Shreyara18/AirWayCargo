@@ -9,18 +9,14 @@ import (
 
 	"flag"
 
-	"Air_Way_Cargo/dtos"
-	"Air_Way_Cargo/internal/config"
-	"Air_Way_Cargo/internal/handlers"
-
-	"github.com/wiz-freight-org/adapters/utils/db/orm"
-
-	"go.uber.org/zap"
+	"AIRWAYCARGO/dtos"
+	"AIRWAYCARGO/internal/config"
+	"AIRWAYCARGO/internal/config/globals"
+	"AIRWAYCARGO/internal/handlers"
 
 	_ "github.com/lib/pq"
-
 	"github.com/pressly/goose/v3"
-	"Air_Way_Cargo/internal/config/globals"
+	"go.uber.org/zap"
 )
 
 //go:embed migrations/*.sql
